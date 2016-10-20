@@ -1,4 +1,4 @@
-package com.ben.model;
+package com.bento909.model;
 
 public enum Outcome {
 
