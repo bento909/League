@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class CsvParser {
 
-    private String filePath;
-    private File file;
+    private final String filePath;
+    private final File file;
     private Scanner scanner;
 
     public CsvParser(String filePath) {
@@ -21,19 +21,19 @@ public class CsvParser {
     public List<List<String>> parseFile() throws IOException {
         this.scanner = new Scanner(file);
         List<List<String>> fileContents = new ArrayList<>();
-        while(scanner.hasNextLine()) {
+        while (scanner.hasNextLine()) {
             fileContents.add(parseNextLine());
         }
         return fileContents;
     }
 
     private List<String> parseNextLine() throws IOException {
-        if(scanner.hasNextLine()){
+        if (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] tokens = line.split(",");
             return Arrays.asList(tokens);
         }
-        return null;
+        return new ArrayList<>();
     }
 
 }
