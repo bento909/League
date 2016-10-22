@@ -1,6 +1,6 @@
-package com.ben.league;
+package com.bento909;
 
-import com.ben.model.League;
+import com.bento909.model.League;
 
 import java.io.IOException;
 import java.text.ParseException;

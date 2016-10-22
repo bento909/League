@@ -1,10 +1,9 @@
-package com.ben.league;
+package com.bento909;
 
-import com.ben.io.CsvParser;
-import com.ben.model.League;
-import com.ben.model.Match;
-import com.ben.model.Result;
-import com.ben.model.Team;
+import com.bento909.model.League;
+import com.bento909.model.Match;
+import com.bento909.model.Result;
+import com.bento909.model.Team;
 
 import java.io.IOException;
 import java.text.ParseException;

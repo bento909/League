@@ -1,4 +1,4 @@
-package com.ben.io;
+package com.bento909;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,15 +18,6 @@ public class CsvParser {
         this.file = new File(filePath);
     }
 
-    private List<String> parseNextLine() throws IOException {
-        if(scanner.hasNextLine()){
-            String line = scanner.nextLine();
-            String[] tokens = line.split(",");
-            return Arrays.asList(tokens);
-        }
-        return null;
-    }
-
     public List<List<String>> parseFile() throws IOException {
         this.scanner = new Scanner(file);
         List<List<String>> fileContents = new ArrayList<>();
@@ -34,6 +25,15 @@ public class CsvParser {
             fileContents.add(parseNextLine());
         }
         return fileContents;
+    }
+
+    private List<String> parseNextLine() throws IOException {
+        if(scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            String[] tokens = line.split(",");
+            return Arrays.asList(tokens);
+        }
+        return null;
     }
 
 }

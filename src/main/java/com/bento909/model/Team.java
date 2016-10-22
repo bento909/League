@@ -1,4 +1,4 @@
-package com.ben.model;
+package com.bento909.model;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Team implements Comparable<Team> {
 
     @Override
     public int compareTo(Team other) {
-        Integer.compare(other.getPoints(),this.getPoints());
+        return Integer.compare(other.getPoints(),this.getPoints());
         //we also need to compare goal difference etc
     }
 }
