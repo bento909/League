@@ -1,5 +1,7 @@
 package com.bento909;
 
+import com.google.common.base.Splitter;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.Scanner;
 
 public class CsvParser {
 
+    private static final Splitter SPLITTER = Splitter.on(",");
     private final String filePath;
     private final File file;
     private Scanner scanner;
@@ -29,9 +32,7 @@ public class CsvParser {
 
     private List<String> parseNextLine() throws IOException {
         if (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            String[] tokens = line.split(",");
-            return Arrays.asList(tokens);
+            return SPLITTER.splitToList(scanner.nextLine());
         }
         return new ArrayList<>();
     }
