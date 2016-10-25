@@ -26,6 +26,7 @@ public class FileBasedLeagueGenerator implements LeagueGenerator {
         csvParser = new CsvParser(filename);
     }
 
+
     @Override
     public League generateLeague() throws IOException, ParseException {
         List<List<String>> fileContents = csvParser.parseFile();
@@ -33,16 +34,9 @@ public class FileBasedLeagueGenerator implements LeagueGenerator {
         for (List<String> fileLine : fileContents){
             String team = fileLine.get(HOME_TEAM_NAME_INDEX);
             Match match = generateMatch(fileLine);
-            if (!teamMap.containsKey(team)) {
-                teamMap.put(team, new ArrayList<>());
-            }
-            teamMap.get(team).add(match);
+            addTeamToTeamMap(teamMap, team, match);
         }
-        TreeSet<Team> teams = new TreeSet<>();
-        for (Map.Entry<String, List<Match>> entry : teamMap.entrySet()) {
-            teams.add(new Team(entry.getKey(),entry.getValue()));
-        }
-        return new League(teams);
+        return new League(addTeamsToTreeSet(teamMap));
     }
 
     private Match generateMatch(List<String> fileLine) throws ParseException {
@@ -56,4 +50,22 @@ public class FileBasedLeagueGenerator implements LeagueGenerator {
                 .withManOfTheMatch(fileLine.get(MAN_OF_THE_MATCH_INDEX))
                 .build();
     }
+
+    private Map<String, List<Match>> addTeamToTeamMap (Map<String, List<Match>> teamMap, String team, Match match) {
+        if (!teamMap.containsKey(team)) {
+            teamMap.put(team, new ArrayList<>());
+        }
+        teamMap.get(team).add(match);
+        return teamMap;
+    }
+
+    private TreeSet<Team> addTeamsToTreeSet (Map<String, List<Match>> teamMap) {
+        TreeSet<Team> teams = new TreeSet<>();
+        for (Map.Entry<String, List<Match>> entry : teamMap.entrySet()) {
+            teams.add(new Team(entry.getKey(),entry.getValue()));
+        }
+        return teams;
+    }
+
+
 }
