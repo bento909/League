@@ -4,6 +4,7 @@ import com.bento909.model.League;
 import com.bento909.model.Match;
 import com.bento909.model.Result;
 import com.bento909.model.Team;
+import com.google.common.collect.ImmutableSet;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -59,13 +60,14 @@ public class FileBasedLeagueGenerator implements LeagueGenerator {
         return teamMap;
     }
 
-    private TreeSet<Team> addTeamsToTreeSet (Map<String, List<Match>> teamMap) {
-        TreeSet<Team> teams = new TreeSet<>();
+    private Set<Team> addTeamsToTreeSet (Map<String, List<Match>> teamMap) {
+        ImmutableSet.Builder<Team> teams = ImmutableSet.builder();
         for (Map.Entry<String, List<Match>> entry : teamMap.entrySet()) {
             teams.add(new Team(entry.getKey(),entry.getValue()));
         }
-        return teams;
+        return teams.build();
     }
 
 
 }
+
