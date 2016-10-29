@@ -68,5 +68,5 @@ public class FileBasedLeagueGenerator implements LeagueGenerator {
         return teams.build();
     }
 
-
 }
+
