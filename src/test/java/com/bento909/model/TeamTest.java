@@ -1,7 +1,13 @@
 package com.bento909.model;
 
-/**
- * Created by bento on 01/11/16.
- */
+import com.google.common.collect.ImmutableSet;
+
 public class TeamTest {
+
+    private Match match;
+
+    public void testCompareTo() {
+        private static void Team TEST_TEAM = new Team("Test1",ImmutableSet.of(Match))
+    }
+
 }
