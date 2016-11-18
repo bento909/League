@@ -6,11 +6,11 @@ public class Match {
     
     private final String opposition;
     private final Date matchPlayed;
-    private final java.lang.String venue;
-    private final java.lang.String manOfTheMatch;
+    private final String venue;
+    private final String manOfTheMatch;
     private final Result result;
 
-    private Match(String opposition, Date matchPlayed, java.lang.String venue, java.lang.String manOfTheMatch, Result result) {
+    private Match(String opposition, Date matchPlayed, String venue, String manOfTheMatch, Result result) {
         this.opposition = opposition;
         this.matchPlayed = matchPlayed;
         this.venue = venue;
@@ -26,11 +26,11 @@ public class Match {
         return matchPlayed;
     }
 
-    public java.lang.String getVenue() {
+    public String getVenue() {
         return venue;
     }
 
-    public java.lang.String getManOfTheMatch() {
+    public String getManOfTheMatch() {
         return manOfTheMatch;
     }
 
@@ -45,8 +45,8 @@ public class Match {
     public static class Builder {
         private String opposition;
         private Date matchPlayed;
-        private java.lang.String venue;
-        private java.lang.String manOfTheMatch;
+        private String venue;
+        private String manOfTheMatch;
         private Result result;
         
         public Builder withOpposition(String opposition) {
@@ -59,12 +59,12 @@ public class Match {
             return this;
         }
 
-        public Builder withVenue(java.lang.String venue) {
+        public Builder withVenue(String venue) {
             this.venue = venue;
             return this;
         }
 
-        public Builder withManOfTheMatch(java.lang.String manOfTheMatch) {
+        public Builder withManOfTheMatch(String manOfTheMatch) {
             this.manOfTheMatch = manOfTheMatch;
             return this;
         }
