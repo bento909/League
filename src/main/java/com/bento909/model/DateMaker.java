@@ -3,6 +3,7 @@ package com.bento909.model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.text.ParseException;
 
@@ -21,27 +22,43 @@ public class DateMaker {
         }
     }
 
-    private String dateString(Random rand){
-
+    private String dateString(Random rand) {
+        List<Integer> month30Days = new List<Integer>;
+        month30Days.add(4);
+        month30Days.add(6);
+        month30Days.add(9);
+        month30Days.add(11);
         int year = rand.nextInt(16) + 2001;
         int month = rand.nextInt(12);
         int days = 0;
         int day;
-        if (month == 4 || month == 6 || month == 9 || month == 11) {
+        if (month30Days.contains(month)) {
             days = 30;
+        } else {
             if (month == 2) {
-                if ((year % 100 == 0 && year % 400 == 0) || (year % 4 == 0)) {
+                if (isLeapYear(year)) {
                     days = 29;
-                } else {
+                }
+                else{
                     days = 28;
                 }
-            } else {
-                days = 31;
             }
         }
+
+        {
+            days = 31;
+        }
         day = rand.nextInt(days) + 1;
-        return String.valueOf(day).concat("-").concat(String.valueOf(month))
-                .concat("-").concat(String.valueOf(year));
+        return day + "-" + month + "-" + year;
+    }
+
+    public boolean isLeapYear(int year){
+        if ((year % 100 == 0 && year % 400 == 0) || (year % 4 == 0)){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 
