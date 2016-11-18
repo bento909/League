@@ -1,64 +1,52 @@
 package com.bento909.model;
 
+import com.google.common.collect.ImmutableList;
+
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.text.ParseException;
 
 public class DateMaker {
-    // Generates a date at random
-    public Date dateMaker() {
-        //ArrayList<> month31Days = new List<1,3,5,7,8,10,12>;
-        Date date;
-        Random rand = new Random();
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+
+    private static final List<Integer> MONTHS_30_DAYS = ImmutableList.of(3, 5, 8, 10);
+    private static final Random RANDOM = new Random();
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+
+    public static Date generateRandomDate() {
         try {
-            date = df.parse(dateString(rand));
-            return date;
+            return DATE_FORMAT.parse(generateDateString());
         } catch (ParseException ex) {
-            System.out.println(ex);
+            System.out.println("couldn't parse date, returning Now");
+            return new Date();
         }
     }
 
-    private String dateString(Random rand) {
-        List<Integer> month30Days = new List<Integer>;
-        month30Days.add(4);
-        month30Days.add(6);
-        month30Days.add(9);
-        month30Days.add(11);
-        int year = rand.nextInt(16) + 2001;
-        int month = rand.nextInt(12);
-        int days = 0;
-        int day;
-        if (month30Days.contains(month)) {
-            days = 30;
-        } else {
-            if (month == 2) {
-                if (isLeapYear(year)) {
-                    days = 29;
-                }
-                else{
-                    days = 28;
-                }
-            }
-        }
-
-        {
-            days = 31;
-        }
-        day = rand.nextInt(days) + 1;
+    private static String generateDateString() {
+        int year = RANDOM.nextInt(16) + 2001;
+        int month = RANDOM.nextInt(12);
+        int day = getADayInMonth(getDaysInMonth(month, year));
         return day + "-" + month + "-" + year;
     }
 
-    public boolean isLeapYear(int year){
-        if ((year % 100 == 0 && year % 400 == 0) || (year % 4 == 0)){
-            return true;
-        }
-        else {
-            return false;
+    private static int getDaysInMonth(int month, int year){
+        if (MONTHS_30_DAYS.contains(month)) {
+            return 30;
+        } else {
+            if (month == 1) {
+                return isLeapYear(year) ? 29 : 28;
+            }
+            return 31;
         }
     }
-}
 
+    private static int getADayInMonth(int daysInMonth){
+        return RANDOM.nextInt(daysInMonth) + 1;
+    }
+
+    private static boolean isLeapYear(int year){
+        return (year % 100 == 0 && year % 400 == 0) || (year % 4 == 0);
+    }
+}
