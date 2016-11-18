@@ -11,23 +11,22 @@ public class DateMaker {
     public Date dateMaker() {
         //ArrayList<> month31Days = new List<1,3,5,7,8,10,12>;
         Date date;
-
+        Random rand = new Random();
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-            date = df.parse(dateString());
+            date = df.parse(dateString(rand));
             return date;
-        } catch (Exception ex) {
+        } catch (ParseException ex) {
             System.out.println(ex);
         }
     }
 
-    private String dateString(){
-        Random rand = new Random();
+    private String dateString(Random rand){
+
         int year = rand.nextInt(16) + 2001;
-        int month = rand.nextInt(12) + 1;
+        int month = rand.nextInt(12);
         int days = 0;
         int day;
-        String theDate;
         if (month == 4 || month == 6 || month == 9 || month == 11) {
             days = 30;
             if (month == 2) {
@@ -41,9 +40,8 @@ public class DateMaker {
             }
         }
         day = rand.nextInt(days) + 1;
-        theDate = String.valueOf(day).concat("-").concat(String.valueOf(month))
+        return String.valueOf(day).concat("-").concat(String.valueOf(month))
                 .concat("-").concat(String.valueOf(year));
-        return theDate;
     }
 }
 
